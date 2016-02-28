@@ -25,19 +25,43 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Hello World</title>
     </head>
-    <body>
-        <div class="app">
-            <h1>PhoneGap</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <div class="event received">
-                  <p>Device is Ready</p>
+    <body ng-app="battletime">
+        <section ng-controller="mainCtrl">
+            
+            <section  class="loader" ng-show="isLoading">
+               <div id="floatingCirclesG">
+                    <div class="f_circleG" id="frotateG_01"></div>
+                    <div class="f_circleG" id="frotateG_02"></div>
+                    <div class="f_circleG" id="frotateG_03"></div>
+                    <div class="f_circleG" id="frotateG_04"></div>
+                    <div class="f_circleG" id="frotateG_05"></div>
+                    <div class="f_circleG" id="frotateG_06"></div>
+                    <div class="f_circleG" id="frotateG_07"></div>
+                    <div class="f_circleG" id="frotateG_08"></div>
                 </div>
+            </section>
+            
+            <h1>Battletime</h1>
+            
+            <h2>Selecteer bboy</h2>
+            <select ng-show="bboys.length != 0" ng-model='selectedBboyId'>
+                <option ng-repeat="bboy in bboys" value="{{bboy._id}}">
+                    {{bboy.name}}
+                </option>
+            </select>
+            
+            
+            
+            <section ng-show="selectedBboyId">
+                <img ng-src="http://www.rawneal.nl/battletime/images/{{selectedBboyId}}.jpg?timestamp={{timestamp}}">
+                <button ng-click="takePicture();">Take Picture</button>
+                <button ng-click="saveBboy()" >Save</button>
+            </section>
 
-                <button onclick="app.takePicture();">Take Picture</button>
-            </div>
-        </div>
-        <script type="text/javascript" src="phonegap.js"></script>
+        </sectionn>
+        <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
             app.initialize();
