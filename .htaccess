@@ -1,4 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_URI}  ^/page\.php$
-RewriteCond %{QUERY_STRING} ^id=([0-9]*)$
-RewriteRule ^(.*)$ http://example.site/page/%1.pdf [R=302,L]
