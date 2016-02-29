@@ -7,19 +7,12 @@
     <author email="info@rawneal.nl" href="http://rawneal.nl">
         Stijn Smulders
     </author>
-    
     <preference name="phonegap-version" value="cli-5.2.0" />
-    
     <preference name="permissions" value="none" />
-    
     <preference name="webviewbounce" value="true" />
-    
-    <plugin name="git@github.com:apache/cordova-plugin-camera.git" />
-    <plugin name="git@github.com:apache/cordova-plugin-whitelist.git" />
+    <plugin name="https://github.com/apache/cordova-plugin-camera.git" />
+    <plugin name="https://github.com/apache/cordova-plugin-whitelist.git" />
     <access origin="*" />
-    
     <feature name="http://api.phonegap.com/1.0/camera" />
-    
     <engine name="browser" spec="~4.0.0" />
-    
 </widget>
