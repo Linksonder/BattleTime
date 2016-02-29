@@ -1,5 +1,7 @@
 html{
     min-height: 100%;
+    background-color:#444;
+    color:white;
 }
 body{
     margin:0px;
@@ -8,7 +10,12 @@ body{
 }
 
 img{
-    width:100%;
+    width: 100%;
+    margin-left:-5px;
+    margin-top:5px;
+    border:5px solid white;
+    box-shadow: 2px 3px 12px black;
+    box-sizing: content-box;
 }
 
 input, select, button, span{
@@ -16,6 +23,22 @@ input, select, button, span{
     height:50px;
     font-size:20px;
     display:block;
+    padding:10px;
+    border:0px;
+    margin-top:5px;
+    box-shadow: 2px 3px 12px black;
+
+    
+}
+
+select{
+    background-color:#B80202;
+    color:white;
+    border:0px;
+}
+
+select:focus{
+    border:1px solid #D90202;
 }
 
 h2{
@@ -42,6 +65,12 @@ input{
     margin-top:-60px !important;
     margin-left:-60px !important;
 }
+
+.container{
+    width:90%;
+    margin-left:5%;
+}
+
 
 
 /** pure css loader **/
