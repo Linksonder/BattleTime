@@ -20,13 +20,14 @@
     <preference name="permissions" value="none"/>
     <preference name="webviewbounce" value="true"/>
 
-    <gap:plugin name="com.jamiestarke.webviewdebug" spec="1.0.8" source="pgb" />
     <gap:plugin name="org.apache.cordova.core.camera" />
+    
     <plugin name="cordova-plugin-whitelist" />
+    <access origin="*"/>
     
     <feature name="http://api.phonegap.com/1.0/camera"/>
     
-    <access origin="http://rawneal.nl" subdomains="true" />
+   
     
     <icon src="www/img/logo.png" />
     
