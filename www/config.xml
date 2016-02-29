@@ -22,4 +22,7 @@
 
     <gap:plugin name="com.jamiestarke.webviewdebug" spec="1.0.8" source="pgb" />
     <gap:plugin name="org.apache.cordova.core.camera" />
+    
+    <access origin="http://rawneal.nl" subdomains="true" />
+    
 </widget>
