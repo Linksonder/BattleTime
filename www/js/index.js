@@ -47,20 +47,22 @@ battletime.controller('mainCtrl', function($scope, $http){
 
         var params = new Object();
         options.params = params;
-
-
+        
+        var url = "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId;
+        
+        
         var ft = new FileTransfer();
-        ft.upload($scope.imageURI, "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId,
-            function(result) {
-                $scope.timestamp = new Date();
-                $scope.isLoading = false;
-                $scope.$apply();
-            },
-            function(error) {
-               $scope.isLoading = false;
-            },
-            options
-            );
+        ft.upload($scope.imageURI, url, onSuccess, onError); 
+
+        function onSuccess(result){
+              $scope.timestamp = new Date();
+              $scope.isLoading = false;
+              $scope.$apply();
+        };
+        
+        function onError(error) {
+              $scope.isLoading = false;
+        };
     }
     
     $scope.takePicture = function(){
@@ -70,7 +72,7 @@ battletime.controller('mainCtrl', function($scope, $http){
          { 
               quality: 50, 
               destinationType: navigator.camera.DestinationType.FILE_URI,
-              sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY 
+              sourceType: navigator.camera.PictureSourceType.CAMERA 
           });
     }
      

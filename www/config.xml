@@ -1,34 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<!-- config.xml reference: https://build.phonegap.com/docs/config-xml -->
-<widget xmlns     = "http://www.w3.org/ns/widgets"
-        xmlns:gap = "http://phonegap.com/ns/1.0"
-        id        = "com.phonegap.hello-world"
-        version   = "1.0.0">
-
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.phonegap.hello-world" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Battletime</name>
-
     <description>
         Small app to manage battletime
     </description>
-
-    <author href="http://rawneal.nl" email="info@rawneal.nl">
+    <author email="info@rawneal.nl" href="http://rawneal.nl">
         Stijn Smulders
     </author>
-
+    
     <preference name="phonegap-version" value="cli-5.2.0" />
-    <preference name="permissions" value="none"/>
-    <preference name="webviewbounce" value="true"/>
-
-    <gap:plugin name="org.apache.cordova.core.camera" />
     
-    <plugin name="cordova-plugin-whitelist" />
-    <access origin="*"/>
+    <preference name="permissions" value="none" />
     
-    <feature name="http://api.phonegap.com/1.0/camera"/>
+    <preference name="webviewbounce" value="true" />
     
-   
+    <plugin name="git@github.com:apache/cordova-plugin-camera.git" />
+    <plugin name="git@github.com:apache/cordova-plugin-whitelist.git" />
+    <access origin="*" />
     
-    <icon src="www/img/logo.png" />
+    <feature name="http://api.phonegap.com/1.0/camera" />
+    
+    <engine name="browser" spec="~4.0.0" />
     
 </widget>
