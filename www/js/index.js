@@ -42,19 +42,14 @@ battletime.controller('mainCtrl', function($scope, $http){
 
         var options = new FileUploadOptions();
         options.fileKey="userFile";
-        options.fileName= 'uploaded.png';
-        options.mimeType="text/plain";
 
         var params = new Object();
         options.params = params;
         
         var url = "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId;
         
-        
-        var ft = new FileTransfer();
-        ft.upload($scope.imageURI, url, onSuccess, onError); 
-
-        function onSuccess(result){
+          function onSuccess(result){
+            alert('success');
               $scope.timestamp = new Date();
               $scope.isLoading = false;
               $scope.$apply();
@@ -62,7 +57,11 @@ battletime.controller('mainCtrl', function($scope, $http){
         
         function onError(error) {
               $scope.isLoading = false;
+              console.log('error' + error);
         };
+ 
+        var ft = new FileTransfer();
+        ft.upload($scope.imageURI, url, onSuccess, onError, options); 
     }
     
     $scope.takePicture = function(){
