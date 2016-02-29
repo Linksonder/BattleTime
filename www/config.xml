@@ -18,5 +18,6 @@
 
     <preference name="phonegap-version" value="3.0.0" /> 
 
+    <gap:plugin name="com.jamiestarke.webviewdebug" spec="1.0.8" source="pgb" />
     <gap:plugin name="org.apache.cordova.core.camera" />
 </widget>
