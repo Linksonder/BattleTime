@@ -39,41 +39,41 @@ battletime.controller('mainCtrl', function($scope, $http){
     $scope.saveBboy = function(){
         
         $scope.isLoading = true;
-        var path = $scope.mediaFile.fullPath;
-        var name =  $scope.mediaFile.name;
-        
+
         var options = new FileUploadOptions();
         options.fileKey="userFile";
-        options.fileName= $scope.mediaFile.name;
-        options.mimeType="image/jpeg";
+        options.fileName= 'uploaded.png';
+        options.mimeType="text/plain";
 
         var params = new Object();
-        params.fullpath = path;
-        params.name = name;
-
         options.params = params;
-        options.chunkedMode = false;
-        
-       
-        
+
+
         var ft = new FileTransfer();
-        ft.upload( path, "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId,
+        ft.upload($scope.imageURI, "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId,
             function(result) {
                 $scope.timestamp = new Date();
                 $scope.isLoading = false;
+                alert('success');
                 $scope.$apply();
             },
             function(error) {
                $scope.isLoading = false;
+                 alert('fail');
             },
             options
             );
     }
     
     $scope.takePicture = function(){
-         navigator.camera.captureImage(function(mediaFiles){
-             $scope.mediaFile = mediaFiles[0];
-         }, function(err){  }, { limit: 1 });
+         navigator.device.capture.captureImage(function(imageURI){
+             $scope.imageURI = imageURI;
+         }, function(err){  }, 
+         { 
+              quality: 50, 
+              destinationType: navigator.camera.DestinationType.FILE_URI,
+              sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY 
+          });
     }
      
       
