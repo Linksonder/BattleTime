@@ -54,19 +54,17 @@ battletime.controller('mainCtrl', function($scope, $http){
             function(result) {
                 $scope.timestamp = new Date();
                 $scope.isLoading = false;
-                alert('success');
                 $scope.$apply();
             },
             function(error) {
                $scope.isLoading = false;
-                 alert('fail');
             },
             options
             );
     }
     
     $scope.takePicture = function(){
-         navigator.device.capture.captureImage(function(imageURI){
+         navigator.camera.getPicture(function(imageURI){
              $scope.imageURI = imageURI;
          }, function(err){  }, 
          { 
