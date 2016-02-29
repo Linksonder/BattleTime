@@ -57,7 +57,7 @@ battletime.controller('mainCtrl', function($scope, $http){
        
         
         var ft = new FileTransfer();
-        ft.upload( path, "http://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId,
+        ft.upload( path, "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId,
             function(result) {
                 $scope.timestamp = new Date();
                 $scope.isLoading = false;
