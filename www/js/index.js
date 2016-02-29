@@ -23,6 +23,7 @@ battletime.controller('mainCtrl', function($scope, $http){
     $scope.test = ' hello world';
     $scope.bboys = [];
     $scope.isLoading = true;
+    $scope.imageURI = null;
     
     $scope.parse = function(){
          $scope.selectedBboy  = angular.fromJson($scope.selectedBboy);
@@ -43,8 +44,9 @@ battletime.controller('mainCtrl', function($scope, $http){
         var options = new FileUploadOptions();
         options.fileKey="userFile";
         options.chunkedMode = false;
+        options.fileName=$scope.imageURI.substr($scope.imageURI.lastIndexOf('/')+1);
 
-        var url = "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId;
+        var url = "http://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId;
         
           function onSuccess(result){
             alert('success');
@@ -55,7 +57,10 @@ battletime.controller('mainCtrl', function($scope, $http){
         
         function onError(error) {
               $scope.isLoading = false;
-              console.log('error' + error);
+              $scope.$apply();
+              alert('error.code' + error.code);
+              alert('error.source' + error.source);
+              alert('error.target' + error.target);
         };
  
         var ft = new FileTransfer();
@@ -65,6 +70,7 @@ battletime.controller('mainCtrl', function($scope, $http){
     $scope.takePicture = function(){
          navigator.camera.getPicture(function(imageURI){
              $scope.imageURI = imageURI;
+             $scope.$apply();
          }, function(err){  }, 
          { 
               quality: 50, 

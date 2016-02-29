@@ -38,7 +38,7 @@
             <section ng-show="selectedBboyId">
                 <img ng-src="http://www.rawneal.nl/battletime/images/{{selectedBboyId}}.jpg?timestamp={{timestamp}}">
                 <button ng-click="takePicture();">Take Picture</button>
-                <button ng-click="saveBboy()" >Save</button>
+                <button ng-click="saveBboy()" ng-disabled="!imageURI">Save</button>
             </section>
         </sectionn>
         
