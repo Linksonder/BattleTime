@@ -71,7 +71,7 @@ battletime.controller('mainCtrl', function($scope, $http){
     }
     
     $scope.takePicture = function(){
-         navigator.device.capture.captureImage(function(mediaFiles){
+         navigator.camera.captureImage(function(mediaFiles){
              $scope.mediaFile = mediaFiles[0];
          }, function(err){  }, { limit: 1 });
     }
