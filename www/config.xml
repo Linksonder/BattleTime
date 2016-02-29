@@ -17,6 +17,8 @@
     </author>
 
     <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="permissions" value="none"/>
+    <preference name="webviewbounce" value="true"/>
 
     <gap:plugin name="com.jamiestarke.webviewdebug" spec="1.0.8" source="pgb" />
     <gap:plugin name="org.apache.cordova.core.camera" />
