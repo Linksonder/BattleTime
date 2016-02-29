@@ -7,24 +7,16 @@
     <author email="info@rawneal.nl" href="http://rawneal.nl">
         Stijn Smulders
     </author>
-    
     <preference name="phonegap-version" value="cli-5.2.0" />
     <preference name="permissions" value="none" />
     <preference name="webviewbounce" value="true" />
-    
     <plugin name="cordova-plugin-camera" />
     <plugin name="cordova-plugin-whitelist" />
     <plugin name="cordova-plugin-file-transfer" />
     <plugin name="cordova-plugin-file" />
-    
     <access origin="*" />
-    
     <feature name="http://api.phonegap.com/1.0/camera" />
-    <feature name="http://api.phonegap.com/1.0/file">
-    <feature name="http://api.phonegap.com/1.0/file-transfer">
-    
+    <feature name="http://api.phonegap.com/1.0/file" />
+    <feature name="http://api.phonegap.com/1.0/file-transfer" />
     <engine name="browser" spec="~4.0.0" />
-    
 </widget>
-
-
