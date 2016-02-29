@@ -42,10 +42,8 @@ battletime.controller('mainCtrl', function($scope, $http){
 
         var options = new FileUploadOptions();
         options.fileKey="userFile";
+        options.chunkedMode = false;
 
-        var params = new Object();
-        options.params = params;
-        
         var url = "https://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId;
         
           function onSuccess(result){
