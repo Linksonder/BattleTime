@@ -7,15 +7,18 @@
         <meta name="format-detection" content="telephone=no" />
         
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+      
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.14.9/select.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+
         
         <title>Hello World</title>
         
     </head>
     
     <body ng-app="battletime">
-        <section class='container' ng-controller="mainCtrl">   
+        <section ng-controller="mainCtrl">   
             <section  class="loader" ng-show="isLoading">
                <div id="floatingCirclesG">
                     <div class="f_circleG" id="frotateG_01"></div>
@@ -27,23 +30,32 @@
                     <div class="f_circleG" id="frotateG_07"></div>
                     <div class="f_circleG" id="frotateG_08"></div>
                 </div>
-            </section>   
-            <h1>Battletime</h1>
-            <h2>Selecteer bboy</h2>
-            <select ng-show="bboys.length != 0" ng-model='selectedBboyId'>
-                <option ng-repeat="bboy in bboys" value="{{bboy._id}}">
-                    {{bboy.name}}
-                </option>
-            </select>
-            <section ng-show="selectedBboyId">
-                <img ng-src="http://www.rawneal.nl/battletime/images/{{selectedBboyId}}.jpg?timestamp={{timestamp}}">
-                <button ng-click="takePicture();">Take Picture</button>
-                <button ng-click="saveBboy()" ng-disabled="!imageURI">Save</button>
             </section>
-        </sectionn>
+            
+            <section class='container'>
+                     
+                <ui-select ng-model="entity.selected" class="select" ng-change="selectChange()">
+                    <ui-select-match>
+                        <span>{{$select.selected.name}}</span>
+                    </ui-select-match>
+                    <ui-select-choices repeat="entity in entities | filter: $select.search">
+                        <span ng-bind="entity.name"></span>
+                    </ui-select-choices>
+                </ui-select>
+                
+                <section ng-show="entity.selected" ng-cloak>
+                    <img ng-src="http://www.rawneal.nl/battletime/{{entity.selected.img_url}}?timestamp={{timestamp}}" imageonload>
+                    <button ng-click="takePicture();">Take Picture</button>
+                    <button ng-click="saveBboy()" ng-disabled="!imageURI">Save</button>
+                </section>
+            </section>
+        </section>
         
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.14.9/select.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
+
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         

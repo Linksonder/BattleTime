@@ -15,25 +15,38 @@ var app = {
     }
 };
 
-var battletime = angular.module('battletime', []);
+var battletime = angular.module('battletime', ['ui.select']);
 
 battletime.controller('mainCtrl', function($scope, $http){
     
-    $scope.selectedBboy = {};
+    $scope.entity = {
+      selected: null
+    };
+    
     $scope.test = ' hello world';
-    $scope.bboys = [];
+    $scope.entities = [];
     $scope.isLoading = true;
     $scope.imageURI = null;
     
-    $scope.parse = function(){
-         $scope.selectedBboy  = angular.fromJson($scope.selectedBboy);
-        
-    }
     
-    $http.get('http://www.rawneal.nl/battletime/bboy/getall').then( function(result){
-         $scope.bboys =  angular.fromJson(result.data);
-           $scope.isLoading = false;
+    $http.get('http://www.rawneal.nl/battletime/api/getall').then( function(result){
+         $scope.entities =  result.data;
+         $scope.isLoading = false;
     });
+    
+    $scope.selectChange = function(){
+        $scope.isLoading = true;
+        var field = document.createElement('input');
+        field.setAttribute('type', 'text');
+        document.body.appendChild(field);
+
+        setTimeout(function() {
+            field.focus();
+            setTimeout(function() {
+                field.setAttribute('style', 'display:none;');
+            }, 50);
+        }, 50);
+    }
     
     $scope.timestamp = new Date();
     
@@ -46,7 +59,7 @@ battletime.controller('mainCtrl', function($scope, $http){
         options.chunkedMode = false;
         options.fileName=$scope.imageURI.substr($scope.imageURI.lastIndexOf('/')+1);
 
-        var url = "http://www.rawneal.nl/battletime/bboy/UpdatePicture/" + $scope.selectedBboyId;
+        var url = "http://www.rawneal.nl/battletime/api/UpdatePicture/" + $scope.entity.selected._id;
         
           function onSuccess(result){
             alert('success');
@@ -82,4 +95,17 @@ battletime.controller('mainCtrl', function($scope, $http){
       
       
      
+});
+
+
+battletime.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                scope.isLoading = false;
+                scope.$apply();
+            });
+        }
+    };
 });

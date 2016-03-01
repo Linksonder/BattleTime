@@ -7,6 +7,7 @@ body{
     margin:0px;
     min-height: 100%;
     position: static;
+    background-color:transparent !important;
 }
 
 img{
@@ -26,7 +27,7 @@ button:disabled{
     background-color:#eee;
 }
 
-input, select, button, span{
+button{
     width:100%;
     height:50px;
     font-size:20px;
@@ -37,23 +38,11 @@ input, select, button, span{
     box-shadow: 2px 3px 12px black;
 }
 
-select{
-    background-color:#B80202;
-    color:white;
-    border:0px;
-}
-
-select:focus{
-    border:1px solid #D90202;
-}
 
 h2{
     font-size:16px;
 }
 
-input{
-    width:100%;
-}
 
 .loader{
     display: block;
@@ -75,9 +64,35 @@ input{
 .container{
     width:90%;
     margin-left:5%;
+    margin-top:50px;
 }
 
+    
+    .select{
+        position: absolute;
+        width:100%;
+        left:0px;
+        top:0px;
+    }
 
+    .select .ui-select-choices-row{
+        font-size:30px;
+    }
+    
+    .select .ui-select-toggle{
+        font-size: 20px;
+        height: 50px;
+        padding-top: 12px;
+        box-shadow: 2px 3px 12px black;
+        border-radius: 0px;
+    }
+    
+    .select .ui-select-search{
+        font-size: 20px;
+        height: 50px;
+        box-shadow: 2px 3px 12px black;
+        border-radius: 0px;
+    }
 
 /** pure css loader **/
 
