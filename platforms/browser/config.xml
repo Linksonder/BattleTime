@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.phonegap.hello-world" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Battletime</name>
+    <description>
+        Small app to manage battletime
+    </description>
+    <author email="info@rawneal.nl" href="http://rawneal.nl">
+        Stijn Smulders
+    </author>
+    <preference name="phonegap-version" value="cli-5.2.0" />
+    <preference name="permissions" value="none" />
+    <preference name="webviewbounce" value="true" />
+    <access origin="*" />
+    <icon src="icon.png" />
+</widget>
