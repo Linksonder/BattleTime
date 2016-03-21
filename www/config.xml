@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.hello-world" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="nl.rawneal.battletime" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Battletime</name>
     <description>
         Small app to manage battletime
@@ -10,6 +10,7 @@
     <preference name="phonegap-version" value="cli-5.2.0" />
     <preference name="permissions" value="none" />
     <preference name="webviewbounce" value="true" />
+    <preference name="orientation" value="portrait" />
     <plugin name="cordova-plugin-camera" />
     <plugin name="cordova-plugin-whitelist" version="1" />
     <plugin name="cordova-plugin-file-transfer" />
@@ -19,4 +20,5 @@
     <feature name="http://api.phonegap.com/1.0/file" />
     <icon src="icon.png" />
     <engine name="browser" spec="~4.0.0" />
+    
 </widget>

@@ -4,76 +4,103 @@ battletime.controller('mainCtrl', function($scope, $http){
     
     $scope.page = 'start';
     
-    $scope.entity = {
-      selected: null
-    };
+    $scope.contestent = {};
+    $scope.timestamp = new Date();
     
     $scope.test = ' hello world';
     $scope.entities = [];
     $scope.isLoading = true;
-    $scope.imageURI = null;
     
     $http.get('http://www.rawneal.nl/battletime/api/getall').then( function(result){
          $scope.entities = result.data;
          $scope.isLoading = false;
     });
     
-    $scope.selectChange = function(){
-        $scope.isLoading = true; //required for loading the img
-        hideKeyboard();
+    $scope.isInvalid = function(){
+        return $scope.contestent.name == null || $scope.contestent.type == null
     }
-     
-     /** This code is for hiding the keyboard  */
-    function hideKeyboard(){
-        var field = document.createElement('input');
-        field.setAttribute('type', 'text');
-        document.body.appendChild(field);
-        
-        setTimeout(function() {
-            field.focus();
-            setTimeout(function() {
-                field.setAttribute('style', 'display:none;');
-            }, 50);
-        }, 50);
-    }
-    
-    
-    $scope.timestamp = new Date();
     
     $scope.addEntity = function(){
+        
+        if($scope.isInvalid())
+            return;
+            
         $scope.isLoading = true;
+            
         $http({
             url: 'http://www.rawneal.nl/battletime/api/AddEntity',
             data:  $scope.contestent,
             method: 'POST',
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}   
+            headers: {'ContentnewEntity-Type': 'application/x-www-form-urlencoded'}   
         }).then(function(newEntity){
-            $http.get('http://www.rawneal.nl/battletime/api/getall').then( function(result){
-                $scope.entities = result.data;
-                $scope.isLoading = false;
-                $scope.page = 'edit';
+            $scope.contestent = newEntity.data;
+            $scope.savePhoto(function(){
+                $http.get('http://www.rawneal.nl/battletime/api/getall').then( function(entities){
+                        $scope.entities = entities.data;
+                        $scope.page = 'start';
+                        $scope.isLoading = false;
+                        $scope.search = "";
+                        $scope.$apply();
+                });
             });
-    
-            
         });
     }
     
-    $scope.saveBboy = function(){
+    
+    
+    $scope.select = function(entity){
+        $scope.contestent = entity;
+        $scope.page = 'details';
+    }
+    
+    $scope.toggle = function(page){
+        if($scope.page == "add" || $scope.page == "details"){
+            page = "start";
+            $scope.search = "";
+        }
+            
+        if(page == "add"){
+            $scope.contestent = {
+                name: $scope.search
+            }
+        }
+        
+         $scope.page = page;
+         
+        
+    }
+    
+    $scope.getEntityImage = function(){
+        if($scope.imageURI)
+             return $scope.imageURI;
+        if($scope.contestent.img_url)
+            return "http://www.rawneal.nl/battletime/" + $scope.contestent.img_url + "?" +  $scope.timestamp;
+        
+        return "img/default.png"
+    }
+    
+    
+    $scope.savePhoto = function(cb){
         
         $scope.isLoading = true;
+        
+        if(!$scope.imageURI){
+            return cb();
+        }
 
         var options = new FileUploadOptions();
         options.fileKey="userFile";
         options.chunkedMode = false;
         options.fileName=$scope.imageURI.substr($scope.imageURI.lastIndexOf('/')+1);
-
-        var url = "http://www.rawneal.nl/battletime/api/UpdatePicture/" + $scope.entity.selected._id;
         
-          function onSuccess(result){
-            alert('success');
+        var url = "http://www.rawneal.nl/battletime/api/UpdatePicture/" + $scope.contestent._id;
+        function onSuccess(result){
+              alert("Saved!");
+              $scope.imageURI = null;
               $scope.timestamp = new Date();
               $scope.isLoading = false;
               $scope.$apply();
+              if(cb){cb();}
         };
         
         function onError(error) {
@@ -83,7 +110,7 @@ battletime.controller('mainCtrl', function($scope, $http){
               alert('error.source' + error.source);
               alert('error.target' + error.target);
         };
- 
+        
         var ft = new FileTransfer();
         ft.upload($scope.imageURI, url, onSuccess, onError, options); 
     }
@@ -103,17 +130,4 @@ battletime.controller('mainCtrl', function($scope, $http){
       
       
      
-});
-
-
-battletime.directive('imageonload', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-            element.bind('load', function() {
-                scope.isLoading = false;
-                scope.$apply();
-            });
-        }
-    };
 });

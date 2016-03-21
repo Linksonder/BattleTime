@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
         
-        <title>Hello World</title>
+        <title>Battletime</title>
         
     </head>
     
@@ -34,13 +34,71 @@
                 </div>
             </section>
             
-            <section class="start" ng-show="page == 'start'">
-                  <h2>Start</h2>
-                  <button class="add" ng-click="page = 'add'">New contestent</button>
-                  <button class="edit" ng-click="page = 'edit'">Edit contestent</button>
+            <section class="start" >
+                <section class="header">
+                    <img class="logo" src="img/logo.png" />
+                    <input ng-model="search" ng-disabled="page != 'start'">
+                    <button class="add" ng-click="toggle('add')">
+                        <span  ng-class="{toCancel: page != 'start' } ">+</span>
+                    </button>
+                </section>
+                
+                <section ng-show="page == 'start'">
+                    <ul class="entities" ng-show="page == 'start'">
+                        <li ng-repeat="entity in entities | filter: search" ng-click="select(entity)">
+                            <h1>{{entity.name}} </h1>
+                            <span>{{entity.descr}}</span>
+                         </li>
+                    </ul>
+                </section>
+                
+                <section class="add_page" ng-show="page == 'add'" >
+                    <section class="card">
+                        <label>Name</label>
+                        <input ng-model="contestent.name" required/>
+                        <label>Descr</label>
+                        <input ng-model="contestent.descr" required/>
+                        <label>Type</label>
+                        <select ng-model="contestent.type" required>
+                            <option value="bboy">Bboy</option>
+                            <option value="duo">Duo</option>
+                        </select>
+                    </section>
+
+                    <section class="avatar">
+                        <img ng-src="{{getEntityImage()}}">
+                        <button ng-click="takePicture()"><img src="img/camera.png"></button>
+                    </section>
+                    <section class="options">
+                        <button ng-click="addEntity()" ng-disabled="isInvalid()">Add</button>
+                    </section>
+             
+                </section>
+                
+                <section class="add_page" ng-show="page == 'details'" >
+                    <section class="card">
+                        <h1>{{contestent.name}}</h1>
+                        <label>Descr</label>
+                        <span>{{contestent.descr}}</span>
+                        <label>Type</label>
+                        <span>{{contestent.type}}
+                    </section>
+                    
+                    <section class="avatar">
+                        <img ng-src="{{getEntityImage()}}" alt="{{getEntityImage()}}">
+                        <button ng-click="takePicture()"><img src="img/camera.png"></button>
+                    </section>
+                    
+                    <section class="options">
+                        <button ng-click="savePhoto()"  ng-disabled="!imageURI">Save</button>
+                    </section>
+   
+                </section>
+                
+                
             </section>
             
-            <section ng-show="page == 'add'" >
+            <!--<section ng-show="page == 'add'" >
               
                 <button class="back" ng-click="page = 'start'">Back</button>
                 <h2>New contestent</h2>
@@ -54,15 +112,24 @@
                     <option value="bboy">Bboy</option>
                     <option value="duo">Duo</option>
                 </select>
+                
+                <img ng-src="{{imageURI}}">
+                <button ng-click="takePicture()">Take Picture</button>
+                
                 <button ng-click="addEntity()">Save changes</button>
                 
                 
             </section>
             
-            <section ng-show="page == 'edit'">
+            <section ng-show="page == 'details'">
+                
+                <section class="header">
+                    <h2>Battletime</h2>
+                    <input ng-model="search" placeholder="name">
+                </section>
                 
                 <button class="back" ng-click="page = 'start'">Back</button>
-                <h2>Edit contestent</h2>
+                <h2>Change picture</h2>
                 <ui-select ng-model="entity.selected" class="select" ng-change="selectChange()">
                     <ui-select-match  placeholder="Select Bboy">
                         <span>{{$select.selected.name}}</span>
@@ -73,12 +140,17 @@
                 </ui-select>
                 
                 <section ng-show="entity.selected" ng-cloak>
-                    <img ng-src="http://www.rawneal.nl/battletime/{{entity.selected.img_url}}?timestamp={{timestamp}}" imageonload>
+                    <section class="old">
+                        <img ng-src="http://www.rawneal.nl/battletime/{{entity.selected.img_url}}?timestamp={{timestamp}}" imageonload>
+                    </section>
+                    <section class="new">
+                        <img ng-src="{{imageURI}}">
+                    </section>
                     <button ng-click="takePicture()">Take Picture</button>
                     <button ng-click="saveBboy()" ng-disabled="!imageURI">Save</button>
                 </section>
             </section>
-        </section>
+        </section>-->
         
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="js/angular.min.js"></script>
