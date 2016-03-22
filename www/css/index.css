@@ -1,27 +1,29 @@
-html{
+html, body {
+    margin: 0;
+    padding: 0;
     min-height: 100%;
+    overflow-x: hidden;
     background-color:#444;
-    color:white;
+}
     
-}
-body{
-    margin:0px;
-    min-height: 100%;
-    position: static;
-    background-color:transparent !important;
-}
-
+    
 
 button{
     background-color:#f9f9f9;
     padding:5px;
     border:0px;
     font-size:30px;
+    box-shadow: 1px 1px 10px black;
 }
 
-button:disabled{
-    background-color:#eee;
-}
+    button:disabled{
+        background-color:#eee;
+    }
+
+    button.danger{
+            background-color:#c0392b;
+            color:white;
+    }
 
 
 h2{
@@ -38,6 +40,7 @@ h2{
     width:100%;
     height:100%;
     background-color: rgba(0,0,0, 0.3);
+    z-index: 999;
 }
 
 .loader #floatingCirclesG{
@@ -53,12 +56,12 @@ h2{
 }
 
  
-.entities{
+ul.cards{
     list-style-type: none;
     padding:5px;
 }
 
-    .entities li {
+    ul.cards li {
         background-color:white;
         color:black;
         padding:5px;
@@ -66,33 +69,127 @@ h2{
         position: relative;
         height:50px;
     }
-    .entities h1{
+    ul.cards h1{
         width:100%;
         margin:0px;
         font-size:20px;
     }
-    .entities span{
+    ul.cards span{
         font-size:12px;
         color:#bbb;
     }
-    
-    .entities li img{
-        position: absolute;
-        right:0px;
-        top:0px;
-        height:100%;
+        .battles li {
+            padding-right:50px;
+        }
+        .battles li span{
+            color:#c0392b;
+            font-size:20px;
+        }
+        .battles li img{
+            position: absolute;
+            height:100%;
+            top:0px;
+            right:0px;
+        }
+
+.avatar{
+    width:200%;
+    position: relative;
+    clear:both;
+}
+
+    .avatar .info{
+        
+        position: relative;
+        width:50%;
+        display:inline-block;
+        padding:5px;
+        padding-bottom:0;
     }
 
-.add_page{
-    padding:5px;
-} 
+        .avatar .info > .options{
+            position: relative;
+            display:block;
+            float:right;
+            width:30%;
+            padding:0px;
+            margin:0px;
+            padding-left:5px;
+        }
+
+        .avatar .info .options button{
+            text-align: center;
+            padding:0px;
+            width:100%;
+            display:inline-block;
+            margin:0px;
+            margin-bottom:5px;
+        }
+
+        .avatar .info .options button > img{
+            width:50px;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:auto;
+            margin-bottom: auto;
+
+        }
+        
+            .avatar .info .partial{
+                position: relative;
+                overflow: hidden;
+                width:70%;
+                display:inline-block;
+                background-color:white;
+                color:black;
+                box-shadow: 1px 1px 10px black;
+            }
+            
+                .avatar .info .partial .slider{
+                    width:200%;
+                    height:100%;
+                    position: relative;
+                    -webkit-transition: all 0.3s;
+                    -moz-transition: all 0.3s;
+                    transition: all 0.3s;
+                }
+                
+                    .slider.toggleBattle{
+                        -ms-transform: translate(-50%); /* IE 9 */
+                        -webkit-transform: translate(-50%); /* Safari */
+                        transform: translate(-50%);
+                    }
+
+                
+                    .slider img{
+                        width:50%;
+                    }
+
+                    .slider .battle{
+                        float:right;
+                        width:50%;
+                        height:100%;
+                        padding:5px;
+                        position: relative;
+                    }
+                                        
+                        .slider .battle h1{
+                            width:100%;
+                            padding-bottom:5px;
+                            font-size:20px;
+                            border-bottom: 1px solid darkgray;
+                        }
+                        
+                        .slider .battle .options{
+                            margin-top:15px;
+                        }
+                        
+                    
 
 .card{
     background-color:white;
     color:black;
     padding:5px;
-    margin-bottom:5px;
-    position: relative;
 }
 
     .card h1{
@@ -135,8 +232,8 @@ h2{
     .card input:focus{
         outline: none;
         border-bottom:2px solid #c0392b;
-        
     }
+    
     
 .header{
     padding:5px;
@@ -204,36 +301,13 @@ h2{
     }
     
     
-.avatar{
-    width:100%;
-    position: relative;
-    margin-bottom:5px;
+.page.add{
+     padding-bottom:50px;
 }
-
-.avatar > img{
-   width:70%;
-   float:left;
-}
-
-.avatar button{
-    text-align: center;
-    padding:0px;
-    width:30%;
-    height:100%;
-    float:left;
-}
-
-.avatar button > img{
-    width:50px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:auto;
-    margin-bottom: auto;
-
-}
-
-.options{
-    margin-top:5px;
+    
+.page > .options{
+    position: fixed;
+    bottom:0px;
     width:100%;
     font-size:20px;
 }
@@ -246,12 +320,6 @@ h2{
     .options button:disabled{
         color:#aaa;
     }
-
-
-
-
-
-
 
 
 

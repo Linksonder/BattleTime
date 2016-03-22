@@ -11,6 +11,8 @@
     <preference name="permissions" value="none" />
     <preference name="webviewbounce" value="true" />
     <preference name="orientation" value="portrait" />
+    <preference name="DisallowOverscroll" value="true" />
+
     <plugin name="cordova-plugin-camera" />
     <plugin name="cordova-plugin-whitelist" version="1" />
     <plugin name="cordova-plugin-file-transfer" />

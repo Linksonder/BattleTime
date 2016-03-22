@@ -35,6 +35,7 @@
             </section>
             
             <section class="start" >
+                
                 <section class="header">
                     <img class="logo" src="img/logo.png" />
                     <input ng-model="search" ng-disabled="page != 'start'">
@@ -43,8 +44,8 @@
                     </button>
                 </section>
                 
-                <section ng-show="page == 'start'">
-                    <ul class="entities" ng-show="page == 'start'">
+                <section class="page" ng-show="page == 'start'" ng-cloak>
+                    <ul class="cards" ng-show="page == 'start'">
                         <li ng-repeat="entity in entities | filter: search" ng-click="select(entity)">
                             <h1>{{entity.name}} </h1>
                             <span>{{entity.descr}}</span>
@@ -52,7 +53,7 @@
                     </ul>
                 </section>
                 
-                <section class="add_page" ng-show="page == 'add'" >
+                <section class="page add" ng-show="page == 'add'" ng-cloak>
                     <section class="card">
                         <label>Name</label>
                         <input ng-model="contestent.name" required/>
@@ -64,18 +65,24 @@
                             <option value="duo">Duo</option>
                         </select>
                     </section>
-
                     <section class="avatar">
-                        <img ng-src="{{getEntityImage()}}">
-                        <button ng-click="takePicture()"><img src="img/camera.png"></button>
+                        <section class="info">
+                             <section class="partial">
+                                <section class="slider">
+                                    <img ng-src="{{getEntityImage()}}" alt="{{getEntityImage()}}">
+                                </section>
+                             </section>
+                            <section class="options" >
+                                <button ng-click="takePicture()"><img src="img/camera.png"></button>
+                            </section>
+                        </section>
                     </section>
                     <section class="options">
                         <button ng-click="addEntity()" ng-disabled="isInvalid()">Add</button>
                     </section>
-             
                 </section>
                 
-                <section class="add_page" ng-show="page == 'details'" >
+                <section class="page" ng-show="page == 'details'" ng-cloak>
                     <section class="card">
                         <h1>{{contestent.name}}</h1>
                         <label>Descr</label>
@@ -84,17 +91,44 @@
                         <span>{{contestent.type}}
                     </section>
                     
-                    <section class="avatar">
-                        <img ng-src="{{getEntityImage()}}" alt="{{getEntityImage()}}">
-                        <button ng-click="takePicture()"><img src="img/camera.png"></button>
+                    <section class="avatar" >
+                        <section class="info">
+                            <section class="partial">
+                                <section class="slider" ng-class="{toggleBattle: showBattle}">
+                                    <img ng-src="{{getEntityImage()}}" alt="{{getEntityImage()}}">
+                                    <section class="battle card">
+                                        <h1>Choose opponent</h1>
+                                        <select ng-model="opponent">
+                                            <option value="{{entity._id}}" ng-repeat="entity in entities | filter: contestent.type">{{entity.name}}</option>
+                                        </select>
+                                        <section class="options">
+                                            <button ng-click="battle(opponent)" ng-disabled="!opponent">Fight</button>
+                                        </section>
+                                    </section>
+                                </section>
+                            </section>
+                            <section class="options" >
+                                <button ng-click="takeAndSavePicture()"><img src="img/camera.png"></button>
+                                <button ng-click="showBattle =  !showBattle;"  ng-class="{danger: showBattle}"><img src="img/battle.png"></button>
+                            </section>
+                        </section>
                     </section>
                     
-                    <section class="options">
-                        <button ng-click="savePhoto()"  ng-disabled="!imageURI">Save</button>
+                    <section class="battles">
+                        <ul class="cards">
+                            <li ng-repeat="battle in contestent.battles">
+                                <section ng-show="battle.a_id == contestent._id">
+                                    <h1>You <span>VS</span> {{battle.b_name}}
+                                    <img class="img_b" ng-src="http://www.rawneal.nl/battletime/{{battle.b_img_url}}" />
+                                </section>
+                                <section ng-show="battle.b_id == contestent._id">
+                                    <h1>You <span>VS</span> {{battle.a_name}}
+                                    <img class="img_a" ng-src="http://www.rawneal.nl/battletime/{{battle.a_img_url}}" />
+                                </section>
+                            </li>
+                        </ul>
                     </section>
-   
                 </section>
-                
                 
             </section>
             
