@@ -11,7 +11,7 @@ battletime.controller('mainCtrl', function($scope, $http){
     $scope.entities = [];
     $scope.isLoading = true;
     $scope.showBattle = false;
-    $scope.tab = 'b';
+    $scope.tab = 'a';
     
     document.addEventListener("backbutton", function(e){
         $scope.page = 'start';
