@@ -34,7 +34,7 @@
                 </div>
             </section>
             
-            <section class="start" >
+            <section >
                 
                 <section class="header">
                     <img class="logo" src="img/logo.png" />
@@ -44,13 +44,36 @@
                     </button>
                 </section>
                 
-                <section class="page" ng-show="page == 'start'" ng-cloak>
-                    <ul class="cards" ng-show="page == 'start'">
+                <section class="page start" ng-show="page == 'start'" ng-cloak>
+                    
+                    <ul class="cards" ng-show="tab == 'a'">
                         <li ng-repeat="entity in entities | filter: search" ng-click="select(entity)">
                             <h1>{{entity.name}} </h1>
                             <span>{{entity.descr}}</span>
-                         </li>
+                        </li>
                     </ul>
+                    
+                    <ul class="cards" ng-show="tab == 'b'" >
+                        <li class="battle" 
+                            ng-class="{selected: selectedBattle._id == battle._id, started: battle.timestamp}" 
+                            ng-repeat="battle in battles | filter: search" 
+                            ng-click="selectBattle($index, battle)" >
+                                {{battle.a_name}}</h1> <span>VS</span>  {{battle.b_name}} </br>
+                                <span class="timestamp" ng-show="battle.timestamp">{{battle.timestamp}}</span>
+                        </li>
+                    </ul>
+                    
+                    <section class="tabs" >
+                        <button ng-click="tab = 'b'" ng-class="{active : tab == 'b'}">Battles</button>
+                    </section>
+                    
+                    <section class="options" ng-class="{show: selectedBattle != null}">
+                        <button ng-click="startBattle()">Start</button>
+                        <button ng-click="deleteBattle()" class="danger" >Delete</button>
+                        <button ng-click="selectedBattle = null">Cancel</button>
+                    </section>
+
+
                 </section>
                 
                 <section class="page add" ng-show="page == 'add'" ng-cloak>

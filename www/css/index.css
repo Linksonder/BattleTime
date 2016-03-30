@@ -320,8 +320,85 @@ ul.cards{
     .options button:disabled{
         color:#aaa;
     }
+    
+li.battle{
+    text-align: center;
+    position: relative;
+    font-size:20px;
+    border-left:5px solid #c0392b;;
+    border-right:5px solid transparent;
+}
 
+    li.battle.started{
+         border-left:5px solid darkgreen;
+    }
+    
+    li.battle.selected {
+        border-left:5px solid cornflowerblue;
+    }
 
+    li.battle span.timestamp{
+        color: #aaa;
+        position:absolute;
+        bottom:0px;
+        font-size:15px;
+        width:100%;
+        text-align: center;
+        display:block;
+    }
+
+    li.battle span{
+        color:#c0392b;
+    }
+    
+    .start .options{
+        position: fixed;
+        width:100%;     
+        left:0px; bottom:0px;
+        background-color: white;
+        box-shadow: 1px 1px 10px black;
+        z-index: 999;
+        padding:15px;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+        -ms-transform: translate(0, 100%); /* IE 9 */
+        -webkit-transform: translate(0, 100%); /* Safari */
+        transform: translate(0, 100%); 
+
+    }
+    
+    .start .options.show{
+        -ms-transform: translate(0,0); /* IE 9 */
+        -webkit-transform: translate(0,0); /* Safari */
+        transform: translate(0,0);
+    }
+    
+    .start .options button{
+
+        font-size:14px;
+        padding:15px;
+        min-width:25%;
+    }
+
+.tabs{
+    position: fixed;
+    bottom:0px;
+    width:100%;
+}
+    
+    .tabs button{
+        width:50%;
+        float:left;
+        box-shadow: none;
+        font-size:25px;
+    }
+    
+    .tabs button.active{
+        color:#c0392b;
+    }
+    
+  
 
 /** pure css loader **/
 #floatingCirclesG{

@@ -5,12 +5,13 @@ battletime.controller('mainCtrl', function($scope, $http){
     $scope.page = 'start';
     
     $scope.contestent = {};
+    $scope.selectedBattle = null;
     $scope.timestamp = new Date();
     
-    $scope.test = ' hello world';
     $scope.entities = [];
     $scope.isLoading = true;
     $scope.showBattle = false;
+    $scope.tab = 'b';
     
     document.addEventListener("backbutton", function(e){
         $scope.page = 'start';
@@ -19,10 +20,39 @@ battletime.controller('mainCtrl', function($scope, $http){
         $scope.opponent = null;
     });
     
+    $scope.selectBattle = function(index, battle){
+        $scope.selectedBattle = battle;
+        $scope.selectBattle.index = index;
+    }
+    
+    $scope.startBattle = function(){
+        $scope.isLoading = true;
+         $http.get('http://www.rawneal.nl/battletime/api/StartBattle/' + $scope.selectedBattle._id).then( function(result){
+            $scope.battles = result.data;
+            $scope.isLoading = false;
+        });
+    }
+    
+    $scope.deleteBattle = function(){
+         $scope.battles.splice($scope.selectedBattle.index, 1);
+         $http.get('http://www.rawneal.nl/battletime/api/DeleteBattle/' + $scope.selectedBattle._id).then( function(result){
+            $scope.battles = result.data;
+        });;
+        $scope.selectedBattle = undefined;
+    }
+    
     $scope.loadEntities = function(){
         $scope.isLoading = true;
         $http.get('http://www.rawneal.nl/battletime/api/getall').then( function(result){
             $scope.entities = result.data;
+            $scope.isLoading = false;
+        });
+    }
+    
+    $scope.loadBattles = function(){
+        $scope.isLoading = true;
+        $http.get('http://www.rawneal.nl/battletime/api/getallBattles').then( function(result){
+            $scope.battles = result.data;
             $scope.isLoading = false;
         });
     }
@@ -41,12 +71,13 @@ battletime.controller('mainCtrl', function($scope, $http){
                 type: $scope.contestent.type == "bboy" ? "1on1" : "2on2"
             },
             method: 'POST',
-            headers: {'ContentnewEntity-Type': 'application/x-www-form-urlencoded'}   
+          
         }).then(function(newEntity){
                 $http.get('http://www.rawneal.nl/battletime/api/GetEntity/' + $scope.contestent._id).then( function(result){
                     $scope.contestent = result.data;
                     alert("Battle saved");
-                     $scope.showBattle = false;
+                    $scope.showBattle = false;
+                    $scope.loadBattles();
                 });     
            
         });
@@ -181,6 +212,6 @@ battletime.controller('mainCtrl', function($scope, $http){
      
      //init
     $scope.loadEntities();  
-      
+    $scope.loadBattles();
      
 });
