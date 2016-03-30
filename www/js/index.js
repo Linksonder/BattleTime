@@ -114,14 +114,17 @@ battletime.controller('mainCtrl', function($scope, $http){
             $scope.contestent = result.data;
             $('<img />')
                 .attr('src', "http://www.rawneal.nl/battletime/" + $scope.contestent.img_url)
+                .error(function(){
+                      $scope.isLoading = false;
+                      $scope.page = 'details';
+                      $scope.$apply(); 
+                })
                 .load(function(){
                       $scope.isLoading = false;
                       $scope.page = 'details';
                       $scope.$apply(); 
                 });
-           
-         
-        });     
+        }, onError);     
     }
     
     $scope.toggle = function(page){
@@ -209,9 +212,28 @@ battletime.controller('mainCtrl', function($scope, $http){
               sourceType: navigator.camera.PictureSourceType.CAMERA 
           });
     }
-     
-     //init
+    
+    $scope.pullToRefresh = function(){
+       return new Promise( function( resolve, reject ) {
+            $http.get('http://www.rawneal.nl/battletime/api/getall').then( function(result){
+                $scope.entities = result.data;
+                $http.get('http://www.rawneal.nl/battletime/api/getallBattles').then( function(result){
+                    $scope.battles = result.data;
+                     resolve();
+                });
+            });          
+        });  
+    }
+    
+    function onError(){
+        alert('Oops! :(');
+        $scope.isLoading = false;
+    }
+    
+    //init
     $scope.loadEntities();  
-    $scope.loadBattles();
+    $scope.loadBattles(); 
+    WebPullToRefresh.init( {loadingFunction: $scope.pullToRefresh });
+
      
 });

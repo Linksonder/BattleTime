@@ -10,6 +10,7 @@
       
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.14.9/select.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/base.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
         
@@ -46,22 +47,36 @@
                 
                 <section class="page start" ng-show="page == 'start'" ng-cloak>
                     
-                    <ul class="cards" ng-show="tab == 'a'">
-                        <li ng-repeat="entity in entities | filter: search" ng-click="select(entity)">
-                            <h1>{{entity.name}} </h1>
-                            <span>{{entity.descr}}</span>
-                        </li>
-                    </ul>
-                    
-                    <ul class="cards" ng-show="tab == 'b'" >
-                        <li class="battle" 
-                            ng-class="{selected: selectedBattle._id == battle._id, started: battle.timestamp}" 
-                            ng-repeat="battle in battles | filter: search" 
-                            ng-click="selectBattle($index, battle)" >
-                                {{battle.a_name}}</h1> <span>VS</span>  {{battle.b_name}} </br>
-                                <span class="timestamp" ng-show="battle.timestamp">{{battle.timestamp}}</span>
-                        </li>
-                    </ul>
+                    <div id="ptr">
+                        <!-- Pull down arrow indicator -->
+                        <span class="genericon genericon-next"></span>
+
+                        <!-- CSS-based loading indicator -->
+                        <div class="loading">
+                            <span id="l1"></span>
+                            <span id="l2"></span>
+                            <span id="l3"></span>
+                        </div>
+                    </div>
+
+                    <div id="content">
+                        <ul class="cards" ng-show="tab == 'a'">
+                            <li ng-repeat="entity in entities | filter: search" ng-click="select(entity)">
+                                <h1>{{entity.name}} </h1>
+                                <span>{{entity.descr}}</span>
+                            </li>
+                        </ul>
+                
+                        <ul class="cards" ng-show="tab == 'b'" >
+                            <li class="battle" 
+                                ng-class="{selected: selectedBattle._id == battle._id, started: battle.timestamp}" 
+                                ng-repeat="battle in battles | filter: search" 
+                                ng-click="selectBattle($index, battle)" >
+                                    {{battle.a_name}}</h1> <span>VS</span>  {{battle.b_name}} </br>
+                                    <span class="timestamp" ng-show="battle.timestamp">{{battle.timestamp}}</span>
+                            </li>
+                        </ul>
+                     </div>
                     
                     <section class="tabs" >
                         <button ng-click="tab = 'a'" ng-class="{active : tab == 'a'}">Challengers</button>
@@ -156,62 +171,11 @@
                 
             </section>
             
-            <!--<section ng-show="page == 'add'" >
-              
-                <button class="back" ng-click="page = 'start'">Back</button>
-                <h2>New contestent</h2>
-                
-                <label>Name</label>
-                <input ng-model="contestent.name" />
-                <label>Descr</label>
-                <input ng-model="contestent.descr" />
-                <label>Type</label>
-                <select ng-model="contestent.type" >
-                    <option value="bboy">Bboy</option>
-                    <option value="duo">Duo</option>
-                </select>
-                
-                <img ng-src="{{imageURI}}">
-                <button ng-click="takePicture()">Take Picture</button>
-                
-                <button ng-click="addEntity()">Save changes</button>
-                
-                
-            </section>
-            
-            <section ng-show="page == 'details'">
-                
-                <section class="header">
-                    <h2>Battletime</h2>
-                    <input ng-model="search" placeholder="name">
-                </section>
-                
-                <button class="back" ng-click="page = 'start'">Back</button>
-                <h2>Change picture</h2>
-                <ui-select ng-model="entity.selected" class="select" ng-change="selectChange()">
-                    <ui-select-match  placeholder="Select Bboy">
-                        <span>{{$select.selected.name}}</span>
-                    </ui-select-match>
-                    <ui-select-choices repeat="entity in entities | filter: $select.search">
-                        <span ng-bind="entity.name"></span>
-                    </ui-select-choices>
-                </ui-select>
-                
-                <section ng-show="entity.selected" ng-cloak>
-                    <section class="old">
-                        <img ng-src="http://www.rawneal.nl/battletime/{{entity.selected.img_url}}?timestamp={{timestamp}}" imageonload>
-                    </section>
-                    <section class="new">
-                        <img ng-src="{{imageURI}}">
-                    </section>
-                    <button ng-click="takePicture()">Take Picture</button>
-                    <button ng-click="saveBboy()" ng-disabled="!imageURI">Save</button>
-                </section>
-            </section>
-        </section>-->
-        
         <script type="text/javascript" src="js/jquery-1.12.1.min.js"></script>
         <script type="text/javascript" src="js/angular.min.js"></script>
+        <script src="js/hammer.2.0.4.js"></script>
+        <script src="js/wptr.1.1.js"></script>
+        </script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.14.9/select.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.0/ui-bootstrap-tpls.min.js"></script>
 

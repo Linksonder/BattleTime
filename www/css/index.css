@@ -299,7 +299,10 @@ ul.cards{
         -webkit-transform: rotateZ(45deg); /* Safari */
         transform: rotateZ(45deg); /* Standard syntax */
     }
-    
+.page{
+    position: relative;
+    min-height: 100%;
+}   
     
 .page.add{
      padding-bottom:50px;
@@ -351,6 +354,10 @@ li.battle{
         color:#c0392b;
     }
     
+    .start{
+        padding-bottom: 40px;
+    }
+    
     .start .options{
         position: fixed;
         width:100%;     
@@ -362,9 +369,9 @@ li.battle{
         -webkit-transition: all 0.3s;
         -moz-transition: all 0.3s;
         transition: all 0.3s;
-        -ms-transform: translate(0, 100%); /* IE 9 */
-        -webkit-transform: translate(0, 100%); /* Safari */
-        transform: translate(0, 100%); 
+        -ms-transform: translate(0, 120%); /* IE 9 */
+        -webkit-transform: translate(0, 120%); /* Safari */
+        transform: translate(0, 120%); 
 
     }
     
@@ -378,7 +385,12 @@ li.battle{
 
         font-size:14px;
         padding:15px;
-        min-width:25%;
+        width:20%;
+        margin-left:6.66%;
+        margin-right:6.66%;
+        box-shadow: none;
+        border:1px solid gray;
+        float:left;
     }
 
 .tabs{
@@ -392,7 +404,14 @@ li.battle{
         float:left;
         box-shadow: none;
         font-size:25px;
+        box-sizing: border-box;
+        outline: none;
     }
+    
+     .tabs button:first-child{
+        border-right:1px solid gray;
+        
+     }
     
     .tabs button.active{
         color:#c0392b;
