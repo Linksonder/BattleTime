@@ -83,16 +83,17 @@
                         <button ng-click="tab = 'b'" ng-class="{active : tab == 'b'}">Battles</button>
                     </section>
                     
-                    <section class="options" ng-class="{show: selectedBattle != null}">
-                        <button ng-click="startBattle()">Start</button>
-                        <button ng-click="deleteBattle()" class="danger" >Delete</button>
-                        <button ng-click="selectedBattle = null">Cancel</button>
+                    <section class="dialog" ng-show="selectedBattle" ng-click="selectedBattle = null">
+                        <section class="options" ng-class="{show: selectedBattle}">
+                            <button ng-click="startBattle()">Start</button>
+                            <button ng-click="deleteBattle()" class="danger" >Delete</button>
+                        </section>
                     </section>
 
 
                 </section>
                 
-                <section class="page add" ng-show="page == 'add'" ng-cloak>
+                  <section class="page add" ng-show="page == 'add' && tab == 'a'" ng-cloak>
                     <section class="card">
                         <label>Name</label>
                         <input ng-model="contestent.name" required/>
@@ -121,6 +122,30 @@
                     </section>
                 </section>
                 
+                <section class="page add" ng-show="page == 'add' && tab == 'b'" ng-cloak>
+                    
+                   
+                    <section class="card">
+                        <label>Duo/Bboy</label>
+                        <select ng-model="battleType">
+                            <option value='bboy'>Bboy</option>
+                            <option value='duo'>Duo</option>
+                        </select>
+                        <label>Player One</label>
+                        <select ng-model="playerOneId">
+                            <option value="{{entity._id}}" ng-repeat="entity in entities | filter: {type: battleType}">{{entity.name}}</option>
+                        </select>
+                        <label>Player Two</label>
+                        <select ng-model="playerTwoId">
+                            <option value="{{entity._id}}" ng-repeat="entity in entities | filter: {type: battleType, _id: '!' + playerOneId}">{{entity.name}}</option>
+                        </select>
+                    </section>
+                    
+                    <section class="options">
+                        <button ng-click="addBattle(playerOneId, playerTwoId, battleType)" ng-disabled="!playerOneId || !playerTwoId">Add</button>
+                    </section>
+                </section>
+                
                 <section class="page" ng-show="page == 'details'" ng-cloak>
                     <section class="card">
                         <h1>{{contestent.name}}</h1>
@@ -137,11 +162,11 @@
                                     <img ng-src="{{getEntityImage()}}" alt="{{getEntityImage()}}">
                                     <section class="battle card">
                                         <h1>Choose opponent</h1>
-                                        <select ng-model="opponent">
+                                        <select ng-model="opponentId">
                                             <option value="{{entity._id}}" ng-repeat="entity in entities | filter: contestent.type">{{entity.name}}</option>
                                         </select>
                                         <section class="options">
-                                            <button ng-click="battle(opponent)" ng-disabled="!opponent">Fight</button>
+                                            <button ng-click="addBattle(contestent._id, opponentId, contestent.type)" ng-disabled="!opponentId">Fight</button>
                                         </section>
                                     </section>
                                 </section>
