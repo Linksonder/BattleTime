@@ -34,6 +34,14 @@ battletime.controller('mainCtrl', function($scope, $http){
         });
     }
     
+    $scope.winBattle = function(winnerId){
+        $scope.isLoading = true;
+         $http.post('http://localhost:1337/battletime/api/WinBattle/' + $scope.selectedBattle._id, {winner: winnerId}).then( function(result){
+            $scope.battles = result.data;
+            $scope.isLoading = false;
+        });
+    }
+    
     $scope.deleteBattle = function(){
          $scope.battles.splice($scope.selectedBattle.index, 1);
          $http.get('http://www.rawneal.nl/battletime/api/DeleteBattle/' + $scope.selectedBattle._id).then( function(result){

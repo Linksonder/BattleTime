@@ -72,7 +72,9 @@
                                 ng-class="{selected: selectedBattle._id == battle._id, started: battle.timestamp}" 
                                 ng-repeat="battle in battles | filter: search" 
                                 ng-click="selectBattle($index, battle)" >
-                                    {{battle.a_name}}</h1> <span>VS</span>  {{battle.b_name}} </br>
+                                    <span class="player" ng-class="{defeated: battle.winner && battle.winner != battle.a_id}">{{battle.a_name}}</span>
+                                    <span class="vs">VS</span>  
+                                    <span class="player" ng-class="{defeated: battle.winner && battle.winner != battle.b_id}">{{battle.b_name}}</span>
                                     <span class="timestamp" ng-show="battle.timestamp">{{battle.timestamp}}</span>
                             </li>
                         </ul>
@@ -85,6 +87,12 @@
                     
                     <section class="dialog" ng-show="selectedBattle" ng-click="selectedBattle = null">
                         <section class="options" ng-class="{show: selectedBattle}">
+                            <button ng-click="winBattle(selectedBattle.a_id)" ng-disable="selectedBattle.winner == selectedBattle.a_id" class="winner">
+                                {{selectedBattle.a_name}}
+                             </button>
+                            <button ng-click="winBattle(selectedBattle.b_id)" ng-disable="selectedBattle.winner == selectedBattle.b_id" class="winner">
+                                {{selectedBattle.b_name}}
+                             </button>
                             <button ng-click="startBattle()">Start</button>
                             <button ng-click="deleteBattle()" class="danger" >Delete</button>
                         </section>
@@ -182,11 +190,11 @@
                         <ul class="cards">
                             <li ng-repeat="battle in contestent.battles">
                                 <section ng-show="battle.a_id == contestent._id">
-                                    <h1>You <span>VS</span> {{battle.b_name}}
+                                    <h1>You <span class="vs">VS</span> {{battle.b_name}}
                                     <img class="img_b" ng-src="http://www.rawneal.nl/battletime/{{battle.b_img_url}}" />
                                 </section>
                                 <section ng-show="battle.b_id == contestent._id">
-                                    <h1>You <span>VS</span> {{battle.a_name}}
+                                    <h1>You <span class="vs">VS</span> {{battle.a_name}}
                                     <img class="img_a" ng-src="http://www.rawneal.nl/battletime/{{battle.a_img_url}}" />
                                 </section>
                             </li>

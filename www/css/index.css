@@ -69,22 +69,28 @@ ul.cards{
         position: relative;
         height:50px;
     }
+    ul.cards li span.vs{
+        color:#c0392b;
+        font-size:20px;
+    }
+    ul.cards li span.defeated{
+        text-decoration: line-through;
+        color:gray;
+    }
     ul.cards h1{
         width:100%;
         margin:0px;
         font-size:20px;
     }
-    ul.cards span{
-        font-size:12px;
-        color:#bbb;
-    }
+        .battles li span.timestamp{
+            font-size:12px;
+            color:#bbb;
+        }
+
         .battles li {
             padding-right:50px;
         }
-        .battles li span{
-            color:#c0392b;
-            font-size:20px;
-        }
+
         .battles li img{
             position: absolute;
             height:100%;
@@ -342,6 +348,7 @@ li.battle{
     li.battle.selected {
         border-left:20px solid cornflowerblue;
     }
+    
 
     li.battle span.timestamp{
         color: #aaa;
@@ -353,7 +360,7 @@ li.battle{
         display:block;
     }
 
-    li.battle span{
+    li.battle span.battle{
         color:#c0392b;
     }
     
@@ -368,6 +375,7 @@ li.battle{
         background-color: rgba(0,0,0, 0.2);
     }
     
+     
     .start .options{
         position: fixed;
         width:100%;     
@@ -402,6 +410,11 @@ li.battle{
         border:1px solid gray;
         float:left;
     }
+    
+           .start .options button.winner{
+                border-bottom:5px solid black;
+            }
+    
 
 .tabs{
     position: fixed;
