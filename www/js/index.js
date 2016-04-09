@@ -36,7 +36,7 @@ battletime.controller('mainCtrl', function($scope, $http){
     
     $scope.winBattle = function(winnerId){
         $scope.isLoading = true;
-         $http.post('http://localhost:1337/battletime/api/WinBattle/' + $scope.selectedBattle._id, {winner: winnerId}).then( function(result){
+         $http.post('http://www.rawneal.nl/battletime/api/WinBattle/' + $scope.selectedBattle._id, {winner: winnerId}).then( function(result){
             $scope.battles = result.data;
             $scope.isLoading = false;
         });
