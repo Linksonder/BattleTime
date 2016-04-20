@@ -101,7 +101,8 @@
 
                 </section>
                 
-                  <section class="page add" ng-show="page == 'add' && tab == 'a'" ng-cloak>
+                <!-- ##### ADD BBOY ### -->
+                <section class="page add" ng-show="page == 'add' && tab == 'a'" ng-cloak>
                     <section class="card">
                         <label>Name</label>
                         <input ng-model="contestent.name" required/>
@@ -130,6 +131,7 @@
                     </section>
                 </section>
                 
+                <!-- ##### ADD BATTLE ### -->
                 <section class="page add" ng-show="page == 'add' && tab == 'b'" ng-cloak>
                     
                    
@@ -145,7 +147,7 @@
                         </select>
                         <label>Player Two</label>
                         <select ng-model="playerTwoId">
-                            <option value="{{entity._id}}" ng-repeat="entity in entities | filter: {type: battleType, _id: '!' + playerOneId}">{{entity.name}}</option>
+                            <option value="{{entity._id}}" ng-repeat="entity in entities | filter: {type: battleType}">{{entity.name}}</option>
                         </select>
                     </section>
                     
@@ -154,13 +156,18 @@
                     </section>
                 </section>
                 
-                <section class="page" ng-show="page == 'details'" ng-cloak>
+                <!-- ##### DETAILS BBOY ### -->
+                <section class="page add" ng-show="page == 'details'" ng-cloak>
                     <section class="card">
-                        <h1>{{contestent.name}}</h1>
+                        <label>Name</label>
+                        <input ng-model="contestent.name" />
                         <label>Descr</label>
-                        <span>{{contestent.descr}}</span>
+                        <input ng-model="contestent.descr" />
                         <label>Type</label>
-                        <span>{{contestent.type}}
+                        <select ng-model="contestent.type">
+                            <option value='bboy'>Bboy</option>
+                            <option value='duo'>Duo</option>
+                        </select>
                     </section>
                     
                     <section class="avatar" >
@@ -199,6 +206,9 @@
                                 </section>
                             </li>
                         </ul>
+                    </section>
+                    <section class="options">
+                        <button ng-click="saveEntity()">Save</button>
                     </section>
                 </section>
                 

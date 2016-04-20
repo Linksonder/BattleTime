@@ -101,6 +101,24 @@ battletime.controller('mainCtrl', function($scope, $http){
         });
     }
     
+     $scope.saveEntity = function(){
+         $scope.isLoading = true;
+            
+        $http({
+            url: 'http://www.rawneal.nl/battletime/api/EditEntity',
+            data:  $scope.contestent,
+            method: 'POST',
+            headers: {'ContentnewEntity-Type': 'application/x-www-form-urlencoded'}   
+        }).then(function(newEntity){
+            $scope.contestent = newEntity.data;
+            $scope.savePhoto(function(){
+                $scope.page = 'start';
+                $scope.search = "";
+                $scope.loadEntities();
+            });
+        });
+    }
+    
     $scope.addEntity = function(){
         
         if($scope.isInvalid())
@@ -123,7 +141,9 @@ battletime.controller('mainCtrl', function($scope, $http){
         });
     }
     
-    
+    $scope.hasChanged = function(){
+        return $scope.contestent == contestent;
+    }
     
     $scope.select = function(entity){
         $scope.contestent = entity;
@@ -152,6 +172,7 @@ battletime.controller('mainCtrl', function($scope, $http){
         }
         if(page == "add"){$scope.contestent = {name: $scope.search}}
         $scope.page = page;
+        $scope.battleType = 'duo';
         $scope.opponent = null;
         $scope.showBattle = false;
     }
